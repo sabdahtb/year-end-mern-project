@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://127.0.0.1:27017/react_kafe");
+mongoose.connect("mongodb://127.0.0.1:27017/yearend-kafe");
 
 const db = mongoose.connection;
 
