@@ -27,3 +27,17 @@ body {
 .Nav ul li {
   margin: 0 10px;
 }
+
+.Nav ul li a {
+  color: black;
+  text-decoration: none;
+}
+
+.Nav ul li a:hover {
+  color: crimson;
+}
+
+.components {
+  width: 100%;
+  padding: 30px 50px;
+}
