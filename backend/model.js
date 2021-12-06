@@ -6,11 +6,8 @@ const kafeMenu = new Schema({
   menu: { type: "string" },
   harga: { type: "number" },
   kategori: { type: "string" },
-  pendapatan: {
-    tanggal: { type: "string" },
-    harian: { type: "number" },
-    mingguan: { type: "number" },
-  },
+  tanggal: { type: "string" },
+  pendapatan: { type: "number" },
 });
 
 module.exports = mongoose.model("Kafe", kafeMenu);
