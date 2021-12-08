@@ -76,3 +76,85 @@ select {
   margin-top: 15px;
   cursor: pointer;
 }
+
+.chasier {
+  width: 100%;
+  padding: 10px 30px;
+  display: flex;
+}
+
+.chasier .kiri {
+  width: 70%;
+  display: inline-block;
+}
+
+.menu {
+  width: 280px;
+  padding: 20px;
+  border: 3px solid black;
+  text-align: center;
+  display: inline-block;
+  margin: 10px;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.menu h2 {
+  color: crimson;
+}
+
+.judul {
+  width: 80%;
+  margin: 20px auto 10px auto;
+  text-align: center;
+  border-bottom: 2px solid gray;
+  padding-bottom: 8px;
+}
+
+.chasier .kanan {
+  width: 30%;
+  padding: 10px;
+  height: max-content;
+  border: 2px solid black;
+  border-radius: 5px;
+  margin-top: 40px;
+}
+
+.judulpesan {
+  text-align: center;
+  width: 100%;
+  border-bottom: 2px solid gray;
+}
+
+.harga {
+  display: flex;
+  margin-top: 10px;
+  border-top: 2px solid gray;
+}
+
+.harga input {
+  border: none;
+  outline: none;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: "Nunito", sans-serif;
+  width: 230px;
+  pointer-events: none;
+}
+
+.pesanan {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+}
+
+.pesanan button {
+  background-color: crimson;
+  color: aliceblue;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  padding: 3px 5px;
+  border-radius: 3px;
+}

@@ -37,6 +37,7 @@ export default function Add({ storeData }) {
         />
         <label>Kategori :</label>
         <select name="kategori" onChange={handleKategori}>
+          <option>Pilih Kategori...</option>
           <option>Makanan</option>
           <option>Minuman</option>
           <option>Cemilan</option>
