@@ -142,19 +142,57 @@ select {
   pointer-events: none;
 }
 
-.pesanan {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 5px;
+table {
+  width: 100%;
+  text-align: left;
 }
 
-.pesanan button {
-  background-color: crimson;
+table th,
+td {
+  padding: 10px;
+}
+
+table button {
   color: aliceblue;
   outline: none;
   border: none;
   cursor: pointer;
   padding: 3px 5px;
   border-radius: 3px;
+  margin: 0 2px;
+}
+table .tambah {
+  background-color: green;
+}
+
+table .kurang,
+.hapus {
+  background-color: crimson;
+}
+table .edit {
+  background-color: rgb(194, 194, 0);
+}
+
+.Tambah .edit {
+  background-color: rgb(194, 194, 0);
+}
+
+.tabel {
+  width: 80%;
+  margin: 20px auto;
+}
+
+.edits {
+  width: 100%;
+  display: flex;
+  padding: 30px;
+}
+
+.editsKiri {
+  width: 60%;
+}
+
+.editsKanan {
+  width: 40%;
+  margin-top: 30px;
 }

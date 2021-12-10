@@ -1,13 +1,30 @@
 import React, { useState } from "react";
 
 export default function Chasier({ kafes, fails, loads }) {
-  const [pesan, setpesan] = useState([]);
+  const [pesan, setPesan] = useState([]);
   const [harga, setHarga] = useState(0);
 
-  const handleKlik = (id) => {
-    const pesanan = kafes.filter((kafe) => kafe._id === id);
-    setpesan((prevPesan) => [...prevPesan, pesanan[0]]);
-    setHarga((prevHarga) => prevHarga + pesanan[0].harga);
+  const handlePesan = (id) => {
+    const getPesanan = kafes.filter((kafe) => kafe._id === id);
+    const pesanan = {
+      qty: 1,
+      menu: getPesanan[0].menu,
+      harga: getPesanan[0].harga,
+    };
+    setPesan((prevPesan) => [...prevPesan, pesanan]);
+    setHarga((prevHarga) => prevHarga + pesanan.harga);
+  };
+
+  const handleTambah = (id) => {
+    setHarga((prevHarga) => prevHarga + pesan[id].harga);
+    pesan[id].qty = pesan[id].qty + 1;
+    setPesan(pesan);
+  };
+
+  const handleKurang = (id) => {
+    setHarga((prevHarga) => prevHarga - pesan[id].harga);
+    pesan[id].qty = pesan[id].qty - 1;
+    setPesan(pesan);
   };
 
   return (
@@ -34,7 +51,7 @@ export default function Chasier({ kafes, fails, loads }) {
               <div
                 className="menu"
                 key={index}
-                onClick={() => handleKlik(menus._id)}
+                onClick={() => handlePesan(menus._id)}
               >
                 <h2>{menus.menu}</h2>
                 <h5>Rp.{menus.harga}</h5>
@@ -50,7 +67,7 @@ export default function Chasier({ kafes, fails, loads }) {
               <div
                 className="menu"
                 key={index}
-                onClick={() => handleKlik(menus._id)}
+                onClick={() => handlePesan(menus._id)}
               >
                 <h2>{menus.menu}</h2>
                 <h5>Rp.{menus.harga}</h5>
@@ -66,7 +83,7 @@ export default function Chasier({ kafes, fails, loads }) {
               <div
                 className="menu"
                 key={index}
-                onClick={() => handleKlik(menus._id)}
+                onClick={() => handlePesan(menus._id)}
               >
                 <h2>{menus.menu}</h2>
                 <h5>Rp.{menus.harga}</h5>
@@ -76,15 +93,44 @@ export default function Chasier({ kafes, fails, loads }) {
       <div className="kanan">
         <h3 className="judulpesan">Pesanan</h3>
 
-        {pesan &&
-          pesan.map((pesanan, index) => (
-            <div className="pesanan" key={index}>
-              <h5>
-                {pesanan.menu} : {pesanan.harga}
-              </h5>
-              <button>Hapus</button>
-            </div>
-          ))}
+        <table>
+          <thead>
+            <tr>
+              <th>Pesanan</th>
+              <th>Qty</th>
+              <th>Aksi</th>
+              <th>Harga</th>
+            </tr>
+          </thead>
+          <tbody>
+            {pesan &&
+              pesan
+                .filter((pesanans) => pesanans.qty > 0)
+                .map((pesanan, index) => (
+                  <tr className="pesanan" key={index}>
+                    <td>{pesanan.menu}</td>
+                    <td>
+                      <h5>{pesanan.qty}</h5>
+                    </td>
+                    <td>
+                      <button
+                        className="kurang"
+                        onClick={() => handleKurang(index)}
+                      >
+                        - 1
+                      </button>
+                      <button
+                        className="tambah"
+                        onClick={() => handleTambah(index)}
+                      >
+                        + 1
+                      </button>
+                    </td>
+                    <td>{pesanan.qty * pesanan.harga}</td>
+                  </tr>
+                ))}
+          </tbody>
+        </table>
 
         <div className="harga">
           <h3>total bayar : Rp.</h3>

@@ -27,16 +27,23 @@ export default function Add({ storeData }) {
     <div className="components">
       <form className="Tambah" onSubmit={handleSubmit}>
         <label>Menu :</label>
-        <input type="text" name="menu" value={menu} onChange={handleMenu} />
+        <input
+          type="text"
+          name="menu"
+          value={menu}
+          onChange={handleMenu}
+          required
+        />
         <label>Harga :</label>
         <input
           type="number"
           name="harga"
           value={harga}
           onChange={handleHarga}
+          required
         />
         <label>Kategori :</label>
-        <select name="kategori" onChange={handleKategori}>
+        <select name="kategori" onChange={handleKategori} required>
           <option>Pilih Kategori...</option>
           <option>Makanan</option>
           <option>Minuman</option>

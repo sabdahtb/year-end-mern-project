@@ -13,6 +13,10 @@ function App() {
   const [fails, setFails] = useState(false);
 
   useEffect(() => {
+    getdata();
+  }, []);
+
+  function getdata() {
     axios
       .get("http://localhost:4000/kafe")
       .then((response) => {
@@ -24,7 +28,7 @@ function App() {
       .finally(() => {
         setLoads(false);
       });
-  }, []);
+  }
 
   function storeData(menus) {
     axios
@@ -38,8 +42,61 @@ function App() {
         });
       })
       .catch((error) => {
-        console.log(error.message);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.message,
+        });
       });
+  }
+
+  function deleteData(id) {
+    Swal.fire({
+      title: "Yakin ingin Menghapus Menu?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yakin dan Hapus!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete("http://localhost:4000/kafe/delete/" + id)
+          .then(() => {
+            const newKafes = kafes.filter((kafe) => kafe._id !== id);
+            setKafes(newKafes);
+          })
+          .catch((error) =>
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: error.message,
+            })
+          );
+        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+      }
+    });
+  }
+
+  function editData(menus) {
+    axios
+      .put("http://localhost:4000/kafe/update/" + menus.id, menus)
+      .then(() => {
+        setKafes((prevKafes) => [...prevKafes, menus]);
+        Swal.fire({
+          icon: "success",
+          title: "Berhasil !!",
+          text: "Menu telah di Update!!",
+        });
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.message,
+        });
+      });
+    getdata();
   }
 
   return (
@@ -53,7 +110,12 @@ function App() {
             element={<Chasier kafes={kafes} fails={fails} loads={loads} />}
           />
           <Route path="/add" element={<Add storeData={storeData} />} />
-          <Route path="/edit" element={<Edit />} />
+          <Route
+            path="/edit"
+            element={
+              <Edit kafes={kafes} deleteData={deleteData} editData={editData} />
+            }
+          />
         </Routes>
       </Router>
     </div>
