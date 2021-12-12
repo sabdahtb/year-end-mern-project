@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import Swal from "sweetalert2";
 
-export default function Chasier({ kafes, fails, loads }) {
+export default function Chasier({ kafes, fails, loads, storeLaba }) {
   const [pesan, setPesan] = useState([]);
   const [harga, setHarga] = useState(0);
+  const [riwayat, setRiwayat] = useState([]);
+  const [laba, setLaba] = useState(0);
 
   const handlePesan = (id) => {
     const getPesanan = kafes.filter((kafe) => kafe._id === id);
@@ -25,6 +28,68 @@ export default function Chasier({ kafes, fails, loads }) {
     setHarga((prevHarga) => prevHarga - pesan[id].harga);
     pesan[id].qty = pesan[id].qty - 1;
     setPesan(pesan);
+  };
+
+  const handleBayar = () => {
+    if (harga === 0) {
+      Swal.fire("Mau bayar apa?", "Pesanannya masih kosong loh", "question");
+    } else {
+      let jam = new Date().getHours();
+      let menit = new Date().getMinutes();
+      let bulan = new Date().toLocaleString(navigator.language, {
+        month: "long",
+      });
+      let tanggal = new Date().getDate();
+      let tahun = new Date().getFullYear();
+      let hari = new Date().toLocaleString(navigator.language, {
+        weekday: "long",
+      });
+
+      if (jam < 10) {
+        jam = "0" + jam;
+      }
+
+      if (menit < 10) {
+        menit = "0" + menit;
+      }
+
+      const newRiwayat = {
+        tanggal: `${hari}, ${tanggal} ${bulan} ${tahun}`,
+        jam: `${jam} : ${menit}`,
+        harga: harga,
+      };
+      setRiwayat((prevRiwayat) => [...prevRiwayat, newRiwayat]);
+      setHarga(0);
+      setPesan([]);
+      setLaba((prevLaba) => prevLaba + harga);
+
+      Swal.fire({
+        icon: "success",
+        title: "Terimakasih :D",
+        text: "Semoga harimu menyenangkan",
+      });
+    }
+  };
+
+  const handleSetor = () => {
+    if (laba === 0) {
+      Swal.fire("Mau setor apa?", "Labanya masih kosong loh", "question");
+    } else {
+      let bulan = new Date().toLocaleString(navigator.language, {
+        month: "long",
+      });
+      let tanggal = new Date().getDate();
+      let tahun = new Date().getFullYear();
+      const setoran = {
+        tanggal: `${tanggal} ${bulan} ${tahun}`,
+        pendapatan: laba,
+      };
+      storeLaba(setoran);
+      setPesan([]);
+      setRiwayat([]);
+      setLaba(0);
+      setHarga(0);
+    }
   };
 
   return (
@@ -133,13 +198,22 @@ export default function Chasier({ kafes, fails, loads }) {
         </table>
 
         <div className="harga">
-          <h3>total bayar : Rp.</h3>
-          <input
-            type="number"
-            name="harga"
-            value={harga}
-            onChange={() => setHarga(harga)}
-          />
+          <h3>Total Bayar : Rp.{harga}</h3>
+          <button onClick={() => handleBayar()}>Bayar Sekarang</button>
+        </div>
+
+        <h3 className="judulpesan">History</h3>
+
+        {riwayat &&
+          riwayat.map((riwayats, index) => (
+            <div className="riwayat" key={index}>
+              <h5>{riwayats.tanggal}</h5>
+              <h5>{riwayats.jam}</h5>
+              <h5>{riwayats.harga}</h5>
+            </div>
+          ))}
+        <div className="setor">
+          <button onClick={() => handleSetor()}>Setor Total : {laba}</button>
         </div>
       </div>
     </div>

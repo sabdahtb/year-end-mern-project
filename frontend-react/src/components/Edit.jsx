@@ -80,8 +80,18 @@ export default function Edit({ kafes, deleteData, editData }) {
                       <td>{menus.harga}</td>
                       <td>{menus.kategori}</td>
                       <td>
-                        <button className="edit">Edit</button>
-                        <button className="hapus">Hapus</button>
+                        <button
+                          className="edit"
+                          onClick={() => tampilEdit(menus._id)}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          className="hapus"
+                          onClick={() => deleteData(menus._id)}
+                        >
+                          Hapus
+                        </button>
                       </td>
                     </tr>
                   ))}
@@ -94,8 +104,18 @@ export default function Edit({ kafes, deleteData, editData }) {
                       <td>{menus.harga}</td>
                       <td>{menus.kategori}</td>
                       <td>
-                        <button className="edit">Edit</button>
-                        <button className="hapus">Hapus</button>
+                        <button
+                          className="edit"
+                          onClick={() => tampilEdit(menus._id)}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          className="hapus"
+                          onClick={() => deleteData(menus._id)}
+                        >
+                          Hapus
+                        </button>
                       </td>
                     </tr>
                   ))}
@@ -130,6 +150,17 @@ export default function Edit({ kafes, deleteData, editData }) {
           </select>
           <button className="edit">Update Menu</button>
         </form>
+
+        <h3 className="his">Riwayat Penjualan Harian</h3>
+        {kafes &&
+          kafes
+            .filter((kafe) => kafe.tanggal !== undefined)
+            .map((labas, index) => (
+              <div className="labas" key={index}>
+                <h5>{labas.tanggal}</h5>
+                <h5>Rp.{labas.pendapatan}</h5>
+              </div>
+            ))}
       </div>
     </div>
   );

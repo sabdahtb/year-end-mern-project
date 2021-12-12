@@ -127,19 +127,23 @@ select {
 }
 
 .harga {
-  display: flex;
   margin-top: 10px;
   border-top: 2px solid gray;
+  padding: 5px 10px;
+  text-align: center;
 }
 
-.harga input {
-  border: none;
+.harga button {
   outline: none;
-  font-size: 16px;
+  border: none;
+  padding: 5px 20px;
+  background-color: green;
+  color: white;
   font-weight: bold;
-  font-family: "Nunito", sans-serif;
-  width: 230px;
-  pointer-events: none;
+  border-radius: 3px;
+  cursor: pointer;
+  margin: auto;
+  margin-bottom: 10px;
 }
 
 table {
@@ -195,4 +199,40 @@ table .edit {
 .editsKanan {
   width: 40%;
   margin-top: 30px;
+}
+
+.riwayat {
+  padding: 5px 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.setor {
+  display: flex;
+  justify-content: center;
+}
+
+.setor button {
+  outline: none;
+  border: none;
+  padding: 5px 20px;
+  background-color: green;
+  color: white;
+  font-weight: bold;
+  border-radius: 3px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.his {
+  width: 100%;
+  text-align: center;
+  margin: 20px auto;
+}
+
+.labas {
+  width: 60%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
 }

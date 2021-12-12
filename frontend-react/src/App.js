@@ -50,6 +50,26 @@ function App() {
       });
   }
 
+  function storeLaba(pendapatan) {
+    axios
+      .post("http://localhost:4000/kafe/add", pendapatan)
+      .then(() => {
+        Swal.fire({
+          icon: "success",
+          title: "Berhasil !!",
+          text: "Setoran Telah Tersimpan",
+        });
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.message,
+        });
+      });
+    getdata();
+  }
+
   function deleteData(id) {
     Swal.fire({
       title: "Yakin ingin Menghapus Menu?",
@@ -107,7 +127,14 @@ function App() {
           <Route
             path="/"
             exact
-            element={<Chasier kafes={kafes} fails={fails} loads={loads} />}
+            element={
+              <Chasier
+                kafes={kafes}
+                fails={fails}
+                loads={loads}
+                storeLaba={storeLaba}
+              />
+            }
           />
           <Route path="/add" element={<Add storeData={storeData} />} />
           <Route
